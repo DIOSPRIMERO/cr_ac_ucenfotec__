@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cr.ac.ucenfotec/cr.ac.ucenfotec.iml" filepath="$PROJECT_DIR$/cr.ac.ucenfotec/cr.ac.ucenfotec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cr_ac_ucenfotec__.iml" filepath="$PROJECT_DIR$/.idea/cr_ac_ucenfotec__.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proyecto_logica/proyecto_logica.iml" filepath="$PROJECT_DIR$/proyecto_logica/proyecto_logica.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proyecto_ui/proyecto_ui.iml" filepath="$PROJECT_DIR$/proyecto_ui/proyecto_ui.iml" />
+    </modules>
+  </component>
+</project>
