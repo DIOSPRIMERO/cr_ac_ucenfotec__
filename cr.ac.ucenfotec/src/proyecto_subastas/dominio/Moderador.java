@@ -3,29 +3,18 @@ package proyecto_subastas.dominio;
 /**
  * Clase que representa al moderador de la plataforma de subastas.
  * <p>
- * El moderador es el administrador del sistema. Solo puede existir <b>un único moderador</b>
- * registrado. Por las reglas de negocio, el moderador no puede crear subastas
- * ni realizar ofertas en la plataforma.
+ * Solo puede existir <b>un único moderador</b> registrado. Por las reglas de negocio,
+ * el moderador no puede crear subastas ni realizar ofertas en la plataforma.
  * </p>
  *
- * <ul>
- *   <li>Hereda todos los atributos de {@link Usuario}.</li>
- *   <li>Debe ser mayor de edad para registrarse.</li>
- *   <li>Es el primer usuario que se registra al iniciar el sistema.</li>
- * </ul>
- *
  * @author Steven Mendez Jimenez
- * @version 1.0
+ * @version 2.0
  * @see Usuario
  */
 public class Moderador extends Usuario {
 
-    /**
-     * Constructor por defecto.
-     * Crea una instancia de Moderador sin inicializar atributos.
-     */
-    public Moderador() {
-    }
+    /** Constructor por defecto. */
+    public Moderador() {}
 
     /**
      * Constructor completo que inicializa todos los atributos del moderador.
@@ -42,6 +31,17 @@ public class Moderador extends Usuario {
     }
 
     /**
+     * Dos moderadores son iguales si comparten la misma identificación.
+     *
+     * @param obj Objeto a comparar.
+     * @return {@code true} si la identificación coincide.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    /**
      * Retorna una representación textual del moderador.
      *
      * @return Cadena con el prefijo [MODERADOR] seguido de los datos del usuario.
@@ -51,3 +51,4 @@ public class Moderador extends Usuario {
         return "[MODERADOR] " + super.toString();
     }
 }
+

@@ -3,19 +3,12 @@ package proyecto_subastas.dominio;
 /**
  * Clase que representa a un vendedor registrado en la plataforma de subastas.
  * <p>
- * El vendedor puede crear subastas con sus objetos, pero <b>no puede realizar ofertas</b>
- * en ninguna subasta de la plataforma. Para registrarse, el vendedor debe ser
- * mayor de edad.
+ * El vendedor puede crear subastas con sus objetos, pero <b>no puede realizar ofertas</b>.
+ * Debe ser mayor de edad para registrarse.
  * </p>
  *
- * <p>Además de los atributos heredados de {@link Usuario}, el vendedor posee:</p>
- * <ul>
- *   <li>Una puntuación de reputación (inicia en 0).</li>
- *   <li>Una dirección de domicilio.</li>
- * </ul>
- *
  * @author Steven Mendez Jimenez
- * @version 1.0
+ * @version 2.0
  * @see Usuario
  */
 public class Vendedor extends Usuario {
@@ -53,33 +46,28 @@ public class Vendedor extends Usuario {
         this.direccion = direccion;
     }
 
-    /**
-     * Obtiene la puntuación de reputación del vendedor.
-     *
-     * @return Puntuación del vendedor.
-     */
-    public double getPuntuacion() { return puntuacion; }
+    // ── Getters / Setters
 
-    /**
-     * Establece la puntuación de reputación del vendedor.
-     *
-     * @param puntuacion Nueva puntuación.
-     */
+    public double getPuntuacion() { return puntuacion; }
     public void setPuntuacion(double puntuacion) { this.puntuacion = puntuacion; }
 
-    /**
-     * Obtiene la dirección de domicilio del vendedor.
-     *
-     * @return Dirección del vendedor.
-     */
     public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+
+    // ── equals
 
     /**
-     * Establece la dirección de domicilio del vendedor.
+     * Dos vendedores son iguales si comparten la misma identificación.
      *
-     * @param direccion Nueva dirección.
+     * @param obj Objeto a comparar.
+     * @return {@code true} si la identificación coincide.
      */
-    public void setDireccion(String direccion) { this.direccion = direccion; }
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    // ── toString
 
     /**
      * Retorna una representación textual del vendedor con sus datos completos.
@@ -93,3 +81,4 @@ public class Vendedor extends Usuario {
                 + " | Dirección: " + direccion;
     }
 }
+

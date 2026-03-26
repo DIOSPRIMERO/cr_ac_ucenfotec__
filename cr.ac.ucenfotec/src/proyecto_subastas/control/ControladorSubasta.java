@@ -83,10 +83,10 @@ public class ControladorSubasta {
     public String crearSubasta(Usuario creador, ArrayList<ObjetoSubasta> objetos,
                                double precioMinimo, String fechaVencimiento) {
         if (creador instanceof Moderador) {
-            return "ERROR: El moderador no puede crear subastas.";
+            return "ERROR: El moderador no puede crear subastas";
         }
         if (objetos == null || objetos.isEmpty()) {
-            return "ERROR: La subasta debe tener al menos un objeto.";
+            return "ERROR: La subasta debe tener al menos un objeto";
         }
 
         // Regla de negocio #9: si el creador es coleccionista, solo puede subastar
@@ -120,19 +120,19 @@ public class ControladorSubasta {
     public String registrarOferta(int idSubasta, Usuario oferente, double monto) {
         Subasta subasta = buscarPorId(idSubasta);
         if (subasta == null) {
-            return "ERROR: No existe una subasta con ese ID.";
+            return "ERROR: No existe una subasta con ese ID";
         }
         if (!subasta.getEstado().equals("Activa")) {
-            return "ERROR: La subasta no está activa.";
+            return "ERROR: La subasta no está activa";
         }
         if (oferente instanceof Moderador) {
-            return "ERROR: El moderador no puede hacer ofertas.";
+            return "ERROR: El moderador no puede hacer ofertas";
         }
         if (oferente instanceof Vendedor) {
-            return "ERROR: Los vendedores no pueden hacer ofertas.";
+            return "ERROR: Los vendedores no pueden hacer ofertas";
         }
         if (subasta.getCreador().getIdentificacion().equals(oferente.getIdentificacion())) {
-            return "ERROR: El creador no puede ofertar en su propia subasta.";
+            return "ERROR: El creador no puede ofertar en su propia subasta";
         }
         if (monto < subasta.getPrecioMinimo()) {
             return "ERROR: El monto es menor al precio mínimo ($" + subasta.getPrecioMinimo() + ").";
@@ -200,3 +200,4 @@ public class ControladorSubasta {
         return lista;
     }
 }
+

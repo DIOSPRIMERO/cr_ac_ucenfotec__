@@ -2,15 +2,9 @@ package proyecto_subastas.dominio;
 
 /**
  * Clase que representa una oferta económica presentada por un coleccionista en una subasta.
- * <p>
- * Una oferta registra el nombre del oferente, su puntuación de reputación
- * y el precio propuesto para adjudicarse los objetos de la subasta.
- * Solo los coleccionistas pueden realizar ofertas; los vendedores y el moderador
- * no tienen permitido ofertar.
- * </p>
  *
  * @author Steven Mendez Jimenez
- * @version 1.0
+ * @version 2.0
  * @see Subasta
  * @see Coleccionista
  */
@@ -25,12 +19,8 @@ public class Oferta {
     /** Precio económico ofertado por los objetos de la subasta. */
     private double precioOfertado;
 
-    /**
-     * Constructor por defecto.
-     * Crea una instancia de Oferta sin inicializar atributos.
-     */
-    public Oferta() {
-    }
+    /** Constructor por defecto. */
+    public Oferta() {}
 
     /**
      * Constructor completo que inicializa todos los atributos de la oferta.
@@ -45,47 +35,35 @@ public class Oferta {
         this.precioOfertado = precioOfertado;
     }
 
-    /**
-     * Obtiene el nombre del coleccionista que realizó la oferta.
-     *
-     * @return Nombre del oferente.
-     */
-    public String getNombreOferente() { return nombreOferente; }
+    // ── Getters / Setters
 
-    /**
-     * Establece el nombre del oferente.
-     *
-     * @param nombreOferente Nuevo nombre del oferente.
-     */
+    public String getNombreOferente() { return nombreOferente; }
     public void setNombreOferente(String nombreOferente) { this.nombreOferente = nombreOferente; }
 
-    /**
-     * Obtiene la puntuación de reputación del oferente.
-     *
-     * @return Puntuación del oferente.
-     */
     public double getPuntuacionOferente() { return puntuacionOferente; }
-
-    /**
-     * Establece la puntuación de reputación del oferente.
-     *
-     * @param puntuacionOferente Nueva puntuación del oferente.
-     */
     public void setPuntuacionOferente(double puntuacionOferente) { this.puntuacionOferente = puntuacionOferente; }
 
-    /**
-     * Obtiene el precio ofertado.
-     *
-     * @return Monto económico de la oferta.
-     */
     public double getPrecioOfertado() { return precioOfertado; }
+    public void setPrecioOfertado(double precioOfertado) { this.precioOfertado = precioOfertado; }
+
+    // ── equals
 
     /**
-     * Establece el precio ofertado.
+     * Dos ofertas son iguales si el mismo oferente propone el mismo precio.
      *
-     * @param precioOfertado Nuevo monto de la oferta.
+     * @param obj Objeto a comparar.
+     * @return {@code true} si nombre del oferente y precio coinciden.
      */
-    public void setPrecioOfertado(double precioOfertado) { this.precioOfertado = precioOfertado; }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || !(obj instanceof Oferta)) return false;
+        Oferta otra = (Oferta) obj;
+        return Double.compare(this.precioOfertado, otra.precioOfertado) == 0
+                && this.nombreOferente != null && this.nombreOferente.equals(otra.nombreOferente);
+    }
+
+    // ── toString
 
     /**
      * Retorna una representación textual de la oferta con sus datos principales.
@@ -99,3 +77,4 @@ public class Oferta {
                 + " | Monto: $" + precioOfertado;
     }
 }
+

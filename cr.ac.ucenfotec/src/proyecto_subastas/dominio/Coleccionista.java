@@ -10,16 +10,8 @@ import java.util.ArrayList;
  * en su colección personal. No puede ofertar en subastas que él mismo haya creado.
  * </p>
  *
- * <p>Además de los atributos heredados de {@link Usuario}, el coleccionista posee:</p>
- * <ul>
- *   <li>Una puntuación de reputación (inicia en 0).</li>
- *   <li>Una dirección de domicilio.</li>
- *   <li>Una lista de intereses o categorías de su preferencia.</li>
- *   <li>Una colección personal de objetos ({@link ObjetoSubasta}).</li>
- * </ul>
- *
  * @author Steven Mendez Jimenez
- * @version 1.0
+ * @version 2.0
  * @see Usuario
  * @see ObjetoSubasta
  */
@@ -39,8 +31,7 @@ public class Coleccionista extends Usuario {
 
     /**
      * Constructor por defecto.
-     * Crea una instancia de Coleccionista con puntuación en 0
-     * y listas de intereses y colección vacías.
+     * Crea una instancia de Coleccionista con puntuación en 0 y listas vacías.
      */
     public Coleccionista() {
         this.puntuacion = 0;
@@ -50,7 +41,6 @@ public class Coleccionista extends Usuario {
 
     /**
      * Constructor completo que inicializa todos los atributos del coleccionista.
-     * Las listas de intereses y colección se inicializan vacías.
      *
      * @param nombreCompleto    Nombre completo del coleccionista.
      * @param identificacion    Número de identificación del coleccionista.
@@ -70,60 +60,18 @@ public class Coleccionista extends Usuario {
         this.coleccion = new ArrayList<>();
     }
 
-    /**
-     * Obtiene la puntuación de reputación del coleccionista.
-     *
-     * @return Puntuación del coleccionista.
-     */
-    public double getPuntuacion() { return puntuacion; }
+    // ── Getters / Setters
 
-    /**
-     * Establece la puntuación de reputación del coleccionista.
-     *
-     * @param puntuacion Nueva puntuación.
-     */
+    public double getPuntuacion() { return puntuacion; }
     public void setPuntuacion(double puntuacion) { this.puntuacion = puntuacion; }
 
-    /**
-     * Obtiene la dirección de domicilio del coleccionista.
-     *
-     * @return Dirección del coleccionista.
-     */
     public String getDireccion() { return direccion; }
-
-    /**
-     * Establece la dirección de domicilio del coleccionista.
-     *
-     * @param direccion Nueva dirección.
-     */
     public void setDireccion(String direccion) { this.direccion = direccion; }
 
-    /**
-     * Obtiene la lista de intereses o categorías del coleccionista.
-     *
-     * @return Lista de intereses.
-     */
     public ArrayList<String> getIntereses() { return intereses; }
-
-    /**
-     * Establece la lista de intereses del coleccionista.
-     *
-     * @param intereses Nueva lista de intereses.
-     */
     public void setIntereses(ArrayList<String> intereses) { this.intereses = intereses; }
 
-    /**
-     * Obtiene la colección personal de objetos del coleccionista.
-     *
-     * @return Lista de objetos que componen la colección.
-     */
     public ArrayList<ObjetoSubasta> getColeccion() { return coleccion; }
-
-    /**
-     * Establece la colección personal de objetos del coleccionista.
-     *
-     * @param coleccion Nueva lista de objetos de la colección.
-     */
     public void setColeccion(ArrayList<ObjetoSubasta> coleccion) { this.coleccion = coleccion; }
 
     /**
@@ -134,6 +82,21 @@ public class Coleccionista extends Usuario {
     public void agregarAColeccion(ObjetoSubasta objeto) {
         this.coleccion.add(objeto);
     }
+
+    // ── equals
+
+    /**
+     * Dos coleccionistas son iguales si comparten la misma identificación.
+     *
+     * @param obj Objeto a comparar.
+     * @return {@code true} si la identificación coincide.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    // ── toString
 
     /**
      * Retorna una representación textual del coleccionista con sus datos completos.
@@ -147,3 +110,4 @@ public class Coleccionista extends Usuario {
                 + " | Dirección: " + direccion;
     }
 }
+

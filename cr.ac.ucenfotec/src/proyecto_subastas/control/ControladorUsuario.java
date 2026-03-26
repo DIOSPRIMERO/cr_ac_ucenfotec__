@@ -11,8 +11,6 @@ import java.util.ArrayList;
  * <p>
  * Esta clase forma parte de la capa de control (lógica de negocio) y actúa
  * como intermediario entre la interfaz gráfica y los objetos del dominio.
- * Implementa todas las reglas de negocio relacionadas con el registro y
- * consulta de usuarios.
  * </p>
  *
  * <p>Reglas de negocio que aplica:</p>
@@ -23,8 +21,13 @@ import java.util.ArrayList;
  *   <li>No se permiten dos usuarios con el mismo número de identificación.</li>
  * </ul>
  *
+ * <p>Novedades Avance 2:</p>
+ * <ul>
+ *   <li>Método {@link #iniciarSesion(String, String)} para autenticación de usuarios.</li>
+ * </ul>
+ *
  * @author Steven Mendez Jimenez
- * @version 1.0
+ * @version 2.0
  * @see Usuario
  * @see Moderador
  * @see Vendedor
@@ -58,16 +61,12 @@ public class ControladorUsuario {
 
     /**
      * Registra un nuevo moderador en el sistema.
-     * <p>
-     * Solo se permite un moderador por sistema. El moderador debe tener
-     * al menos 18 años de edad.
-     * </p>
      *
-     * @param nombre    Nombre completo del moderador.
-     * @param id        Número de identificación del moderador.
-     * @param anioNac   Año de nacimiento del moderador.
+     * @param nombre     Nombre completo del moderador.
+     * @param id         Número de identificación del moderador.
+     * @param anioNac    Año de nacimiento del moderador.
      * @param contrasena Contraseña de acceso a la plataforma.
-     * @param correo    Correo electrónico del moderador.
+     * @param correo     Correo electrónico del moderador.
      * @return Mensaje de éxito o un mensaje de error con prefijo "ERROR:".
      */
     public String registrarModerador(String nombre, String id, int anioNac,
@@ -85,17 +84,13 @@ public class ControladorUsuario {
 
     /**
      * Registra un nuevo vendedor en el sistema.
-     * <p>
-     * El vendedor debe ser mayor de edad y no puede compartir identificación
-     * con un usuario ya registrado.
-     * </p>
      *
-     * @param nombre    Nombre completo del vendedor.
-     * @param id        Número de identificación del vendedor.
-     * @param anioNac   Año de nacimiento del vendedor.
+     * @param nombre     Nombre completo del vendedor.
+     * @param id         Número de identificación del vendedor.
+     * @param anioNac    Año de nacimiento del vendedor.
      * @param contrasena Contraseña de acceso a la plataforma.
-     * @param correo    Correo electrónico del vendedor.
-     * @param direccion Dirección de domicilio del vendedor.
+     * @param correo     Correo electrónico del vendedor.
+     * @param direccion  Dirección de domicilio del vendedor.
      * @return Mensaje de éxito o un mensaje de error con prefijo "ERROR:".
      */
     public String registrarVendedor(String nombre, String id, int anioNac,
@@ -113,30 +108,44 @@ public class ControladorUsuario {
 
     /**
      * Registra un nuevo coleccionista en el sistema.
-     * <p>
-     * El coleccionista debe ser mayor de edad y no puede compartir identificación
-     * con un usuario ya registrado.
-     * </p>
      *
-     * @param nombre    Nombre completo del coleccionista.
-     * @param id        Número de identificación del coleccionista.
-     * @param anioNac   Año de nacimiento del coleccionista.
+     * @param nombre     Nombre completo del coleccionista.
+     * @param id         Número de identificación del coleccionista.
+     * @param anioNac    Año de nacimiento del coleccionista.
      * @param contrasena Contraseña de acceso a la plataforma.
-     * @param correo    Correo electrónico del coleccionista.
-     * @param direccion Dirección de domicilio del coleccionista.
+     * @param correo     Correo electrónico del coleccionista.
+     * @param direccion  Dirección de domicilio del coleccionista.
      * @return Mensaje de éxito o un mensaje de error con prefijo "ERROR:".
      */
     public String registrarColeccionista(String nombre, String id, int anioNac,
                                          String contrasena, String correo, String direccion) {
         if ((2026 - anioNac) < 18) {
-            return "ERROR: Debe ser mayor de edad para registrarse.";
+            return "ERROR: Debe ser mayor de edad para registrarse";
         }
         if (buscarPorId(id) != null) {
-            return "ERROR: Ya existe un usuario con ese ID.";
+            return "ERROR: Ya existe un usuario con ese ID";
         }
         Coleccionista c = new Coleccionista(nombre, id, anioNac, contrasena, correo, 0, direccion);
         usuarios.add(c);
         return "Coleccionista registrado correctamente.";
+    }
+
+    /**
+     * Valida las credenciales de un usuario para iniciar sesión. (Avance 2)
+     *
+     * @param id         Número de identificación del usuario.
+     * @param contrasena Contraseña proporcionada por el usuario.
+     * @return Mensaje de éxito o un mensaje de error con prefijo "ERROR:".
+     */
+    public String iniciarSesion(String id, String contrasena) {
+        Usuario usuario = buscarPorId(id);
+        if (usuario == null) {
+            return "ERROR: No existe un usuario con ese ID";
+        }
+        if (!usuario.getContrasena().equals(contrasena)) {
+            return "ERROR: Contraseña incorrecta";
+        }
+        return "Sesión iniciada correctamente";
     }
 
     /**
@@ -158,11 +167,11 @@ public class ControladorUsuario {
      * Genera un listado textual de todos los usuarios registrados en el sistema.
      *
      * @return Cadena con la lista numerada de usuarios, o un mensaje indicando
-     *         que no hay usuarios registrados.
+     *         que no hay usuarios registrados
      */
     public String listarUsuarios() {
         if (usuarios.isEmpty()) {
-            return "No hay usuarios registrados.";
+            return "No hay usuarios registrados";
         }
         String lista = "";
         for (int i = 0; i < usuarios.size(); i++) {
@@ -171,3 +180,4 @@ public class ControladorUsuario {
         return lista;
     }
 }
+

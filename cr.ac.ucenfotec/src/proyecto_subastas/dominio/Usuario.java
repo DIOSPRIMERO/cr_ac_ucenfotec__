@@ -9,7 +9,7 @@ package proyecto_subastas.dominio;
  * </p>
  *
  * @author Steven Mendez Jimenez
- * @version 1.0
+ * @version 2.0
  */
 public abstract class Usuario {
 
@@ -28,12 +28,8 @@ public abstract class Usuario {
     /** Correo electrónico del usuario. */
     private String correoElectronico;
 
-    /**
-     * Constructor por defecto.
-     * Crea una instancia de Usuario sin inicializar atributos.
-     */
-    public Usuario() {
-    }
+    /** Constructor por defecto. */
+    public Usuario() {}
 
     /**
      * Constructor completo que inicializa todos los atributos del usuario.
@@ -55,7 +51,6 @@ public abstract class Usuario {
 
     /**
      * Calcula la edad aproximada del usuario en años.
-     * El cálculo se realiza restando el año de nacimiento al año actual (2026).
      *
      * @return Edad aproximada del usuario en años.
      */
@@ -63,75 +58,40 @@ public abstract class Usuario {
         return 2026 - anioNacimiento;
     }
 
-    /**
-     * Obtiene el nombre completo del usuario.
-     *
-     * @return Nombre completo del usuario.
-     */
-    public String getNombreCompleto() { return nombreCompleto; }
+    // ── Getters / Setters
 
-    /**
-     * Establece el nombre completo del usuario.
-     *
-     * @param nombreCompleto Nuevo nombre completo.
-     */
+    public String getNombreCompleto() { return nombreCompleto; }
     public void setNombreCompleto(String nombreCompleto) { this.nombreCompleto = nombreCompleto; }
 
-    /**
-     * Obtiene el número de identificación del usuario.
-     *
-     * @return Identificación del usuario.
-     */
     public String getIdentificacion() { return identificacion; }
-
-    /**
-     * Establece el número de identificación del usuario.
-     *
-     * @param identificacion Nueva identificación.
-     */
     public void setIdentificacion(String identificacion) { this.identificacion = identificacion; }
 
-    /**
-     * Obtiene el año de nacimiento del usuario.
-     *
-     * @return Año de nacimiento.
-     */
     public int getAnioNacimiento() { return anioNacimiento; }
-
-    /**
-     * Establece el año de nacimiento del usuario.
-     *
-     * @param anioNacimiento Nuevo año de nacimiento.
-     */
     public void setAnioNacimiento(int anioNacimiento) { this.anioNacimiento = anioNacimiento; }
 
-    /**
-     * Obtiene la contraseña del usuario.
-     *
-     * @return Contraseña del usuario.
-     */
     public String getContrasena() { return contrasena; }
-
-    /**
-     * Establece la contraseña del usuario.
-     *
-     * @param contrasena Nueva contraseña.
-     */
     public void setContrasena(String contrasena) { this.contrasena = contrasena; }
 
-    /**
-     * Obtiene el correo electrónico del usuario.
-     *
-     * @return Correo electrónico.
-     */
     public String getCorreoElectronico() { return correoElectronico; }
+    public void setCorreoElectronico(String correoElectronico) { this.correoElectronico = correoElectronico; }
+
+    // ── equals
 
     /**
-     * Establece el correo electrónico del usuario.
+     * Dos usuarios son iguales si comparten el mismo número de identificación.
      *
-     * @param correoElectronico Nuevo correo electrónico.
+     * @param obj Objeto a comparar.
+     * @return {@code true} si la identificación coincide; {@code false} en caso contrario.
      */
-    public void setCorreoElectronico(String correoElectronico) { this.correoElectronico = correoElectronico; }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || !(obj instanceof Usuario)) return false;
+        Usuario otro = (Usuario) obj;
+        return this.identificacion != null && this.identificacion.equals(otro.identificacion);
+    }
+
+    // ── toString
 
     /**
      * Retorna una representación textual del usuario con sus datos principales.

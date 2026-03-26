@@ -15,7 +15,7 @@ package proyecto_subastas.dominio;
  * </ul>
  *
  * @author Steven Mendez Jimenez
- * @version 1.0
+ * @version 2.0
  */
 public class ObjetoSubasta {
 
@@ -25,18 +25,14 @@ public class ObjetoSubasta {
     /** Descripción detallada del objeto. */
     private String descripcion;
 
-    /** Estado de conservación del objeto: "Nuevo", "Usado" o "Antiguo sin abrir". */
+    /** Estado de conservación del objeto. */
     private String estado;
 
     /** Año en el que fue comprado el objeto. */
     private int anioCompra;
 
-    /**
-     * Constructor por defecto.
-     * Crea una instancia de ObjetoSubasta sin inicializar atributos.
-     */
-    public ObjetoSubasta() {
-    }
+    /** Constructor por defecto. */
+    public ObjetoSubasta() {}
 
     /**
      * Constructor completo que inicializa todos los atributos del objeto.
@@ -55,7 +51,6 @@ public class ObjetoSubasta {
 
     /**
      * Calcula la antigüedad aproximada del objeto en años.
-     * El cálculo se realiza restando el año de compra al año actual (2026).
      *
      * @return Antigüedad del objeto en años.
      */
@@ -63,61 +58,38 @@ public class ObjetoSubasta {
         return 2026 - anioCompra;
     }
 
-    /**
-     * Obtiene el nombre del objeto.
-     *
-     * @return Nombre del objeto.
-     */
-    public String getNombre() { return nombre; }
+    // ── Getters / Setters
 
-    /**
-     * Establece el nombre del objeto.
-     *
-     * @param nombre Nuevo nombre del objeto.
-     */
+    public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    /**
-     * Obtiene la descripción del objeto.
-     *
-     * @return Descripción del objeto.
-     */
     public String getDescripcion() { return descripcion; }
-
-    /**
-     * Establece la descripción del objeto.
-     *
-     * @param descripcion Nueva descripción del objeto.
-     */
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    /**
-     * Obtiene el estado de conservación del objeto.
-     *
-     * @return Estado del objeto ("Nuevo", "Usado" o "Antiguo sin abrir").
-     */
     public String getEstado() { return estado; }
-
-    /**
-     * Establece el estado de conservación del objeto.
-     *
-     * @param estado Nuevo estado del objeto.
-     */
     public void setEstado(String estado) { this.estado = estado; }
 
-    /**
-     * Obtiene el año de compra del objeto.
-     *
-     * @return Año de compra del objeto.
-     */
     public int getAnioCompra() { return anioCompra; }
+    public void setAnioCompra(int anioCompra) { this.anioCompra = anioCompra; }
+
+    // ── equals
 
     /**
-     * Establece el año de compra del objeto.
+     * Dos objetos son iguales si tienen el mismo nombre y año de compra.
      *
-     * @param anioCompra Nuevo año de compra.
+     * @param obj Objeto a comparar.
+     * @return {@code true} si nombre y año de compra coinciden.
      */
-    public void setAnioCompra(int anioCompra) { this.anioCompra = anioCompra; }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || !(obj instanceof ObjetoSubasta)) return false;
+        ObjetoSubasta otro = (ObjetoSubasta) obj;
+        return this.anioCompra == otro.anioCompra
+                && this.nombre != null && this.nombre.equals(otro.nombre);
+    }
+
+    //  toString
 
     /**
      * Retorna una representación textual del objeto con sus datos principales.
